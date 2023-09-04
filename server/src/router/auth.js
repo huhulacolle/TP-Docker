@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getUser, setUser } from "../services/auth.js";
+import verifyToken from "../middleware/verifyToken.js";
 
 const authRouter = Router();
 
@@ -26,6 +27,10 @@ authRouter.post("/auth/signin", async (req, res) => {
   } catch (error) {
     return res.status(403).send(error.toString());
   }
+})
+
+authRouter.get("/auth/test", verifyToken, (req, res) => {
+  return res.send("ça marche");
 })
 
 export default authRouter;
