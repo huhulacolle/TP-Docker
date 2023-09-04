@@ -1,9 +1,10 @@
 version: "3.9"
 services:
-
   back-dev:
     depends_on:
-      - mongoDB-dev
+      - mongo-dev
+    networks:
+      - tp-docker-network
     container_name: back-dev
     image: back:dev
     build:
@@ -12,11 +13,15 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./server:/develop
-    ports: 
+    environment:
+      - MONGODB=${MONGODB}
+    ports:
       - 3000:3000
     tty: true
 
   front-dev:
+    networks:
+      - tp-docker-network
     container_name: front-dev
     image: front:dev
     build:
@@ -29,12 +34,10 @@ services:
       - 5173:5173
     tty: true
 
-  mongoDB-dev:
-    container_name: mongo-dev
-    image: mongodb/mongodb-community-server
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 123
+  mongo-dev:
+    networks:
+      - tp-docker-network
+    image: mongodb/mongodb-community-server:7.0.0-ubi8
     ports:
       - "27017:27017"
     volumes:
@@ -42,3 +45,6 @@ services:
 
 volumes:
   mongo-dev-data:
+
+networks:
+  tp-docker-network:
