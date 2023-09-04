@@ -1,4 +1,4 @@
 FROM node:lts-alpine as dev
 USER node
 WORKDIR /develop
-EXPOSE 5173
+EXPOSE 3000
