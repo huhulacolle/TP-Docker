@@ -1,9 +1,26 @@
-import express from 'express'
+import { Router } from "express";
+import { createUser } from "../services/auth.js";
 
-const router = express.Router();
+const authRouter = Router();
 
-router.get('/auth', async (req, res) => {
-  res.send("salut");
-})
+authRouter.post("/auth/signup", async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send({
+      code: 400,
+      message: "Vous devez renseigner l'email et le mot de passe",
+    });
+  }
+  try {
+    await createUser(req.body);
+    return res.code(201).send("Compte crée");
+  } catch (error) {
+    return res.status(400).send({
+      code: 400,
+      message: error.message
+    });
+  }
+});
 
-export default router;
+authRouter.get("test")
+
+export default authRouter;
