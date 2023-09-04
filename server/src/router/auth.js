@@ -4,7 +4,7 @@ import { createUser } from "../services/auth.js";
 const authRouter = Router();
 
 authRouter.post("/auth/signup", async (req, res) => {
-  if (!req.body.email || !req.body.password) {
+  if (!req.body.username || !req.body.password) {
     return res.status(400).send({
       code: 400,
       message: "Vous devez renseigner l'email et le mot de passe",
@@ -12,7 +12,7 @@ authRouter.post("/auth/signup", async (req, res) => {
   }
   try {
     await createUser(req.body);
-    return res.code(201).send("Compte crée");
+    return res.status(201).send("Compte crée");
   } catch (error) {
     return res.status(400).send({
       code: 400,
@@ -20,7 +20,5 @@ authRouter.post("/auth/signup", async (req, res) => {
     });
   }
 });
-
-authRouter.get("test")
 
 export default authRouter;
