@@ -2,7 +2,7 @@ version: "3.9"
 services:
   back-dev:
     depends_on:
-      - mongo-dev
+      - mongo
     networks:
       - tp-docker-back
       - tp-docker-code
@@ -15,7 +15,6 @@ services:
     volumes:
       - ./server:/develop
     environment:
-      - MONGODB=${MONGODB}
       - SALT=${SALT}
       - JWT=${JWT}
     ports:
@@ -37,7 +36,7 @@ services:
       - 5173:5173
     tty: true
 
-  mongo-dev:
+  mongo:
     networks:
       - tp-docker-back
     image: mongodb/mongodb-community-server:7.0.0-ubi8

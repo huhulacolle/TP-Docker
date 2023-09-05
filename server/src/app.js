@@ -8,7 +8,7 @@ import cors from 'cors';
 const app = express()
 const port = 3000
 
-mongoose.connect("mongodb://mongo-dev:27017/tpdocker")
+mongoose.connect("mongodb://mongo:27017/tpdocker")
   .then(() => {
   console.log('Connecté à MongoDB');
   })
