@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  back:
+    depends_on:
+      - mongo
+    networks:
+      - tp-docker-back
+      - tp-docker-code
+    container_name: back
+    image: back:prod
+    build:
+      context: server/
+      target: prod
+      dockerfile: Dockerfile
+    environment:
+      - SALT=${SALT}
+      - JWT=${JWT}
+    ports: 
+      - 3000:3000
+
+  front:
+    networks:
+      - tp-docker-code
+    container_name: front
+    image: front:prod
+    build:
+      context: client/
+      target: prod
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+
+  mongo:
+    networks:
+      - tp-docker-back
+    image: mongodb/mongodb-community-server:7.0.0-ubi8
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-docker-data:/data/db
+
+volumes:
+  mongo-docker-data:
+
+networks:
+  tp-docker-code:
+  tp-docker-back:
