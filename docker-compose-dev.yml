@@ -4,7 +4,8 @@ services:
     depends_on:
       - mongo-dev
     networks:
-      - tp-docker-network
+      - tp-docker-back
+      - tp-docker-code
     container_name: back-dev
     image: back:dev
     build:
@@ -23,7 +24,7 @@ services:
 
   front-dev:
     networks:
-      - tp-docker-network
+      - tp-docker-code
     container_name: front-dev
     image: front:dev
     build:
@@ -38,7 +39,7 @@ services:
 
   mongo-dev:
     networks:
-      - tp-docker-network
+      - tp-docker-back
     image: mongodb/mongodb-community-server:7.0.0-ubi8
     ports:
       - "27017:27017"
@@ -49,4 +50,5 @@ volumes:
   mongo-dev-data:
 
 networks:
-  tp-docker-network:
+  tp-docker-code:
+  tp-docker-back:
