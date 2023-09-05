@@ -5,8 +5,9 @@ import verifyToken from "../middleware/verifyToken.js";
 const authRouter = Router();
 
 authRouter.post("/signup", async (req, res) => {
+
   if (!req.body.username || !req.body.password) {
-    return res.status(400).send("Vous devez renseigner l'email et le mot de passe");
+    return res.status(400).send("Vous devez renseigner le nom et le mot de passe");
   }
 
   try {
