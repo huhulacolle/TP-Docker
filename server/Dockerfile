@@ -18,5 +18,7 @@ COPY . .
 # Installe les dépendances du projet avec la commande "clean install" 
 # qui permet l'installation des packages sans mettre à jour le package-lock.json
 RUN npm ci
+# Expose le port 3000
+EXPOSE 3000
 # Commande par défaut pour exécuter l'application Node
 CMD [ "node", "." ]
