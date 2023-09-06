@@ -1,6 +1,6 @@
 # TP Docker
 
-> TP Docker utilisant la stack MERN (MongoDB, Express.js, React.js, Node.js) et Docker pour la conteneurisation. Il permet de déployer l'application en environnement de développement et de production en utilisant des conteneurs Docker.
+TP Docker utilisant la stack MERN (MongoDB, Express.js, React.js, Node.js) et Docker pour la conteneurisation. Il permet de déployer l'application en environnement de développement et de production en utilisant des conteneurs Docker.
 
 ## Prérequis
 
