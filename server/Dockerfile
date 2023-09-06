@@ -15,6 +15,8 @@ USER node
 WORKDIR /prod
 # Copie le contenu du code Javascript du PC Local dans le conteneur (ignore les fichiers présent dans le .dockerignore)
 COPY . .
+# Définition de l'environnement Node.js en mode production
+ENV NODE_ENV=production
 # Installe les dépendances du projet avec la commande "clean install" 
 # qui permet l'installation des packages sans mettre à jour le package-lock.json
 RUN npm ci
