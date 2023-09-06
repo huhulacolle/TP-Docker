@@ -4,8 +4,8 @@ services:
     depends_on:
       - mongo
     networks:
-      - tp-docker-back
-      - tp-docker-code
+      - tp-docker-back # Connecte ce service au réseau "tp-docker-back"
+      - tp-docker-code # Connecte ce service au réseau "tp-docker-code".
     container_name: back
     image: back:prod
     build:
@@ -13,10 +13,10 @@ services:
       target: prod
       dockerfile: Dockerfile
     environment:
-      - SALT=${SALT}
+      - SALT=${SALT} # Configuration des variables d'environnement.
       - JWT=${JWT}
     ports: 
-      - 3000:3000
+      - 3000:3000 # Mappage du port hôte/conteneur.
 
   front:
     networks:
@@ -37,11 +37,13 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongo-docker-data:/data/db
+      - mongo-docker-data:/data/db # Volume persistante pour les données de MongoDB.
 
+# Définition du volume pour les données MongoDB
 volumes:
   mongo-docker-data:
 
+# Définition du réseaux
 networks:
   tp-docker-code:
   tp-docker-back:
